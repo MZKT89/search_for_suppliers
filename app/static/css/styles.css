@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microsoft YaHei", Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    background-color: white;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #3a5c85;
+}
+
+.btn.download {
+    background-color: #27ae60;
+    margin-bottom: 20px;
+}
+
+.btn.download:hover {
+    background-color: #2ecc71;
+}
+
+.messages {
+    margin-bottom: 20px;
+}
+
+.flash {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.flash.error {
+    background-color: #fde68a;
+    color: #92400e;
+    border-left: 4px solid #f59e0b;
+}
+
+.flash.info {
+    background-color: #bbf7d0;
+    color: #065f46;
+    border-left: 4px solid #10b981;
+}
+
+.result-stats {
+    margin: 20px 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.table-container {
+    overflow-x: auto;
+    margin: 20px 0;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #2c3e50;
+    color: white;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+tbody tr {
+    background-color: white;
+    transition: background-color 0.3s;
+}
+
+tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f5f7fa;
+}
+
+.info {
+    background-color: white;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-top: 30px;
+}
+
+.info h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.info ul {
+    padding-left: 20px;
+}
+
+.info li {
+    margin-bottom: 8px;
+}
+
+.actions {
+    margin-top: 30px;
+}

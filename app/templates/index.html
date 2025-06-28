@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>材料供应商查询</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>材料供应商查询</h1>
+        <p>上传demand和store文件，查询材料对应的供应商信息</p>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="messages">
+            {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+        
+        <form method="post" action="{{ url_for('main.index') }}" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="demand_file">上传demand文件 (支持 csv, xlsx, xls)</label>
+                <input type="file" id="demand_file" name="demand_file" accept=".csv,.xlsx,.xls" required>
+            </div>
+            <div class="form-group">
+                <label for="store_file">上传store文件 (支持 csv, xlsx, xls)</label>
+                <input type="file" id="store_file" name="store_file" accept=".csv,.xlsx,.xls" required>
+            </div>
+            <button type="submit" class="btn">开始查询</button>
+        </form>
+        
+        <div class="info">
+            <h3>使用说明</h3>
+            <ul>
+                <li>demand文件需包含'材料'列</li>
+                <li>store文件需包含'摘要'、'供应商/客户名称'、'单据金额'列</li>
+                <li>系统将自动过滤纯斜杠或空白的无效材料</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查询结果 - 材料供应商查询</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>查询结果</h1>
+        <!-- 修正下载链接路径为项目根目录的output/ -->
+        <a href="{{ url_for('main.download_csv') }}" class="btn download_csv">
+            <i class="fas fa-download"></i> 下载CSV结果
+        </a>
+        <a href="{{ url_for('main.download_html') }}" class="btn download_html">
+            <i class="fas fa-download"></i> 下载HTML结果
+        </a>
+        <div class="result-stats">
+            <p>共找到 <strong>{{ results|length }}</strong> 条匹配记录</p>
+        </div>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>材料顺序</th>
+                        <th>原始材料</th>
+                        <th>供应商/客户名称</th>
+                        <th>单据金额</th>
+                        <th>摘要</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in results %}
+                    <tr>
+                        <td>{{ row['材料顺序'] }}</td>
+                        <td>{{ row['原始材料'] }}</td>
+                        <td>{{ row['供应商/客户名称'] }}</td>
+                        <td>{{ row['单据金额'] }}</td>
+                        <td>{{ row['摘要'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="actions">
+            <a href="{{ url_for('main.index') }}" class="btn">
+                <i class="fas fa-undo"></i> 重新查询
+            </a>
+        </div>
+    </div>
+</body>
+</html>
