@@ -3,6 +3,13 @@ import re
 import os
 from typing import Optional, List
 
+def create_directories():
+    """创建必要的目录（uploads和output）"""
+    directories = ['uploads', 'output']
+    for dir_name in directories:
+        if not os.path.exists(dir_name):
+            os.makedirs(dir_name)
+            print(f"已创建目录: {dir_name}")
 
 def allowed_file(filename):
     """检查文件扩展名是否允许"""
