@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, send_file, flash, redirect, url_for
 import os
-from werkzeug.utils import secure_filename
-from app.utils import query_matching_data, allowed_file
+# from werkzeug.utils import secure_filename
+from app.utils import query_matching_data, allowed_file, safe_filename
 
 main_bp = Blueprint('main', __name__)
 
@@ -29,8 +29,10 @@ def index():
             
         try:
             # 保存上传的文件
-            demand_path = os.path.join('uploads', secure_filename(demand_file.filename))
-            store_path = os.path.join('uploads', secure_filename(store_file.filename))
+            demand_path = os.path.join('uploads', safe_filename(demand_file.filename))
+            store_path = os.path.join('uploads', safe_filename(store_file.filename))
+            print(demand_path)
+            print(store_path)
             demand_file.save(demand_path)
             store_file.save(store_path)
             

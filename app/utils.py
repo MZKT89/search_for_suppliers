@@ -236,6 +236,18 @@ def _generate_html(df: pd.DataFrame) -> str:
     return html_template
 
 
+
+def safe_filename(filename):
+    """保留中文的安全文件名处理函数"""
+    # 只过滤掉操作系统不允许的特殊字符，保留中文、字母、数字和常见符号
+    filename = re.sub(r'[\\/:*?"<>|]', '_', filename)  # 替换非法字符为下划线
+    # 限制文件名长度（避免超过系统限制）
+    if len(filename) > 200:
+        name, ext = os.path.splitext(filename)
+        filename = name[:180] + ext
+    return filename
+
+
 # 示例调用
 if __name__ == "__main__":
     # 输出为HTML格式
