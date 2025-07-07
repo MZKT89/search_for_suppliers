@@ -5,6 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>材料供应商查询</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        .drop-box {
+            border: 2px dashed #ccc;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 4px;
+        }
+        .drop-box:hover {
+            border-color: #666;
+        }
+        .drop-text {
+            color: #666;
+            font-size: 0.9em;
+            margin: 5px 0 0 0;
+        }
+        /* 拖放时的高亮样式 */
+        .drop-box.active {
+            border-color: #2196F3;
+            background: #f0f7ff;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -24,11 +45,17 @@
         <form method="post" action="{{ url_for('main.index') }}" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="demand_file">上传demand文件 (支持 csv, xlsx, xls)</label>
-                <input type="file" id="demand_file" name="demand_file" accept=".csv,.xlsx,.xls" required>
+                <div class="drop-box" id="demand-drop">
+                    <input type="file" id="demand_file" name="demand_file" accept=".csv,.xlsx,.xls" required>
+                    <p class="drop-text">或直接拖文件到这里</p>
+                </div>
             </div>
             <div class="form-group">
                 <label for="store_file">上传store文件 (支持 csv, xlsx, xls)</label>
-                <input type="file" id="store_file" name="store_file" accept=".csv,.xlsx,.xls" required>
+                <div class="drop-box" id="store-drop">
+                    <input type="file" id="store_file" name="store_file" accept=".csv,.xlsx,.xls" required>
+                    <p class="drop-text">或直接拖文件到这里</p>
+                </div>
             </div>
             <button type="submit" class="btn">开始查询</button>
         </form>
@@ -42,5 +69,51 @@
             </ul>
         </div>
     </div>
+
+    <script>
+        // 简单的拖放功能实现
+        function setupDragDrop(dropId, inputId) {
+            const dropBox = document.getElementById(dropId);
+            const fileInput = document.getElementById(inputId);
+
+            // 阻止浏览器默认的拖放行为
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(event => {
+                dropBox.addEventListener(event, function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+            });
+
+            // 拖文件进入区域时，添加高亮样式
+            dropBox.addEventListener('dragenter', function() {
+                this.classList.add('active');
+            });
+
+            // 拖文件离开区域时，移除高亮样式
+            dropBox.addEventListener('dragleave', function() {
+                this.classList.remove('active');
+            });
+
+            // 拖文件在区域上方时，保持高亮样式
+            dropBox.addEventListener('dragover', function() {
+                this.classList.add('active');
+            });
+
+            // 松开鼠标放下文件时
+            dropBox.addEventListener('drop', function(e) {
+                this.classList.remove('active');
+                // 获取拖放的文件
+                const files = e.dataTransfer.files;
+                if (files.length) {
+                    // 将文件赋值给文件输入框
+                    fileInput.files = files;
+                }
+            });
+        }
+
+        // 为两个上传区域分别设置拖放功能
+        setupDragDrop('demand-drop', 'demand_file');
+        setupDragDrop('store-drop', 'store_file');
+    </script>
 </body>
 </html>
